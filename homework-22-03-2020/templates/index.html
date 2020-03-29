@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+<meta charset="UTF-8">
+<h1></h1>
+<div class="web_lessons">
+    <a href="https://zoom.us/">Перейти в ZOOM</a><br/>
+    <a href="https://www.office.com/?omkt=ru-RU">Перейти в 365 office</a><br/>
+    <a href="https://discordapp.com/">Перейти в Discord</a>
+</div>
+<br/>
+<br/>
+<div class="faq">
+    <a href="/faq"><strong>Вопрос ответ</strong></a>
+</div>
+
+<br/>
+<br/>
+
+<div class="homework_list">
+    <h3>Мои задачи</h3>
+    <table>
+        <tbody>
+            <th>Номер задачи</th>
+            <th>Моё решение</th>
+            <th>Оценка</th>
+        </tbody>
+        {% for homework_item in homework_list %}
+            <tr>
+                <td>{{ homework_item.number }}</td>
+                <td><a href="{{ homework_item.link }}">{{ homework_item.link }}</a></td>
+                <td>
+                    {% if homework_item.rate %}
+                        {{ homework_item.rate }}
+                    {% else %}
+                        Оценки еще нет
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <br/>
+    <br/>
+    <h3>Прикрепить ссылку с архивным файлом</h3>
+    <form action="" method="post">
+    {{ homework.hidden_tag() }}
+    {{ homework.csrf_token }}
+    <p>
+        {{ homework.number.label }}<br>
+        {{ homework.number(class="form-control", type="text", required="required") }}<br>
+        {% for error in homework.number.errors %}
+    <p class="alert alert-danger" role="alert">
+        {{ error }}
+    </p>
+    {% endfor %}
+    </p>
+    <p>
+        {{ homework.link.label }}<br>
+        {{ homework.link(class="form-control", type="text", required="required") }}<br>
+        {% for error in homework.link.errors %}
+    <p class="alert alert-danger" role="alert">
+        {{ error }}
+    </p>
+    {% endfor %}
+    </p>
+    <p>{{ homework.submit(type="submit", class="btn btn-primary") }}</p>
+    {{message}}
+</form>
+</div>
+{% endblock %}

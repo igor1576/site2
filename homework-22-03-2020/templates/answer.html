@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Ответ</h1>
+<div>
+    <form action="" method="post">
+    {{ answer_form.hidden_tag() }}
+    {{ answer_form.csrf_token }}
+    <p>
+        {{ answer_form.answer.label }}<br>
+        {{ answer_form.answer(class="form-control", type="text", required="required") }}<br>
+        {% for error in answer_form.answer.errors %}
+    <p class="alert alert-danger" role="alert">
+        {{ error }}
+    </p>
+    {% endfor %}
+    </p>
+    <p>{{ answer_form.submit(type="submit", class="btn btn-primary") }}</p>
+    </form>
+</div>
+{% endblock %}

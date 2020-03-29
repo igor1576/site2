@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Страница учителя</h1>
+<h3>Список решений</h3>
+    <form action="" method="post">
+        <table>
+            <tbody>
+                <th>Ученик</th>
+                <th>Номер задачи</th>
+                <th>Решение</th>
+                <th>Оценка</th>
+            </tbody>
+            {% for homework_item in homework_list %}
+                <tr>
+                    <td>{{ homework_item.fi}}</td>
+                    <td>{{ homework_item.number }}</td>
+                    <td><a href="{{ homework_item.link }}">{{ homework_item.link }}</a></td>
+                    <td>
+                        {% if homework_item.rate %}
+                            <input type="text" name="rate[{{ homework_item.id }}]" value="{{ homework_item.rate }}">
+                        {% else %}
+                            <input type="text" name="rate[{{ homework_item.id }}]">
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <button>Сохранить</button>
+    </form>
+
+    <h3>FAQ</h3>
+
+    <table>
+        <tbody>
+            <th>Вопрос</th>
+            <th>Ответ</th>
+        </tbody>
+        {% for faq_item in faq_list %}
+        <tr>
+            <td class="faq_question">
+                <p>{{ faq_item.question }}</p>
+            </td>
+            <td class="faq_answer">
+                <p>
+                    {% if faq_item.answer %}
+                        {{ faq_item.answer }}
+                    {% else %}
+                        <a href="/answer/{{ faq_item.id }}">Дать ответ</a>
+                    {% endif %}
+                </p>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

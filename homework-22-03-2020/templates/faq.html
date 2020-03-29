@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Вопрос ответ</h1>
+<div>
+    <table>
+        <tbody>
+            <th>Вопрос</th>
+            <th>Ответ</th>
+        </tbody>
+        {% for faq_item in faq_list %}
+        <tr>
+            <td class="faq_question">
+                <p>{{ faq_item.question }}</p>
+            </td>
+            <td class="faq_answer">
+                <p>
+                    {% if faq_item.answer %}
+                        {{ faq_item.answer }}
+                    {% else %}
+                        Ответа пока нет
+                    {% endif %}
+                </p>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <form action="" method="post">
+    {{ faq_form.hidden_tag() }}
+    {{ faq_form.csrf_token }}
+    <p>
+        {{ faq_form.question.label }}<br>
+        {{ faq_form.question(class="form-control", type="text", required="required") }}<br>
+        {% for error in faq_form.question.errors %}
+    <p class="alert alert-danger" role="alert">
+        {{ error }}
+    </p>
+    {% endfor %}
+    </p>
+    <p>{{ faq_form.submit(type="submit", class="btn btn-primary") }}</p>
+    </form>
+</div>
+{% endblock %}

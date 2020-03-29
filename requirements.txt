@@ -3,4 +3,3 @@ flask_login
 sqlalchemy
 flask_wtf
 wtforms
-sqlalchemy.orm

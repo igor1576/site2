@@ -39,6 +39,7 @@ def login():
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
+    print('here')
     session = db_session.create_session()
     if not(current_user.is_authenticated):
         return redirect("/login")
@@ -160,5 +161,4 @@ def answer(faq_id):
     )
 
 if __name__ == '__main__':
-    db_session.global_init("db/blogs.sqlite")
-    app.run(port=8080, host='localhost')
+    app.run('127.0.0.1', 8000, True)

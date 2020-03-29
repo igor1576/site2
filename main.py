@@ -39,9 +39,11 @@ def login():
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
-    print('here')
+    print('here1')
     session = db_session.create_session()
+    print('here2')
     if not(current_user.is_authenticated):
+        print('here3')
         return redirect("/login")
     if current_user.position:
         return redirect("/teacher")
@@ -161,5 +163,4 @@ def answer(faq_id):
     )
 
 if __name__ == '__main__':
-    print('here')
     app.run('127.0.0.1', 8000, True)

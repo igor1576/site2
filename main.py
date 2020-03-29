@@ -18,7 +18,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 
 
-db_session.global_init("db/mars_explorer.sqlite")
+db_session.global_init("mars_explorer.sqlite")
 
 @login_manager.user_loader
 def load_user(user_id):

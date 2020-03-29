@@ -39,6 +39,7 @@ def login():
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
+    print('here')
     session = db_session.create_session()
     if not(current_user.is_authenticated):
         return redirect("/login")
